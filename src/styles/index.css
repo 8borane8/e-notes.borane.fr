@@ -1,0 +1,233 @@
+#app{
+    width: 100%;
+    max-width: 1200px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+
+    padding: 30px 40px;
+    background-color: white;
+}
+
+#periods-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+    flex-wrap: wrap;
+}
+
+#periods-container > button{
+    width: 200px;
+    
+    font-size: 14px;
+
+    border-style: solid;
+    border-color: #999999;
+
+    cursor: pointer;
+    padding: 8px 0px;
+    border-radius: 8px;
+    transition: all 0.2s linear;
+}
+
+#periods-container > button:not(.active):hover {
+    background-color: #f8f8f8;
+}
+
+#periods-container > button.active{
+    color: white;
+
+    border-color: #0f8fd1;
+    background-color: #0f8fd1;
+}
+
+#table{
+   width: 100%;
+
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+}
+
+#table > div{
+    width: 100%;
+
+    border-top-style: solid;
+    border-color: #cccccc;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+#table > div:first-child{
+    border-top-style: none;
+}
+
+#table > div > *{
+    width: 100%;
+
+    padding: 10px 15px;
+}
+
+#table > div > p{
+    font-size: 15px;
+    font-weight: 500;
+
+    overflow: hidden;
+    text-align: center;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-transform: uppercase;
+}
+
+#table > div > :first-child{
+    max-width: 300px;
+}
+
+#table > div > :last-child{
+    max-width: 150px;
+}
+
+#table > div:not(:first-child) > p:first-child{
+    text-align: left;
+}
+
+#table > div:first-child > p{
+    color: white;
+
+    background-color: #0f8fd1;
+}
+
+#table > div > div{
+    min-height: 42.5px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    column-gap: 15px;
+    row-gap: 5px;
+    
+    flex-wrap: wrap;
+
+    border-style: none solid;
+    border-color: #cccccc;
+}
+
+#table > div > div > div{
+    position: relative;
+    cursor: default;
+}
+
+#table > div > div > div > p{
+    font-size: 15px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 3px;
+}
+
+#table > div > div > div > p > span{
+    color: #535353;
+    font-size: 9px;
+    font-weight: 500;
+}
+
+#table > div > div > div > div{
+    position: absolute;
+    z-index: 1;
+
+    width: 200px;
+
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+
+    border-style: solid;
+    border-color: #999999;
+
+    padding: 20px;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: #00000029 0px 1px 4px;
+}
+
+#table > div > div > div > div > p{
+    font-size: 14px;
+    font-weight: 500;
+
+    margin-bottom: 8px;
+    text-transform: uppercase;
+}
+
+#table > div > div > div > div > div{
+    width: 100%;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#table > div > div > div > div > div > p{
+    font-size: 14px;
+}
+
+#table > div > div > div:hover > div,
+#table > div > div > div:active > div{
+    display: flex;
+}
+
+#app > p > a > svg{
+    fill: #0f8fd1;
+
+    margin-left: 15px;
+}
+
+#app > span{
+    display: none;
+}
+
+@media screen and (max-width: 600px) {
+    #table > div{
+        flex-direction: column;
+
+        border-top-style: none;
+        border-bottom-style: solid;
+    }
+
+    #table > div > *{
+        max-width: none !important;
+
+        border-style: none solid;
+        border-color: #cccccc;
+    }
+
+    #table > div:first-child > p{
+        border-color: #0f8fd1;
+    }
+
+    #table > div > div > div{
+        position: static;
+    }
+
+    #table > div > div > div > div{
+        left: 0px;
+        right: 0px;
+
+        width: auto;
+    }
+}

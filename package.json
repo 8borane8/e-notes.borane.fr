@@ -1,0 +1,14 @@
+{
+    "name": "e-notes.borane.fr",
+    "version": "1.0.0",
+    "author": "borane",
+    "scripts": {
+        "dev": "node src/index.js --dev",
+        "build": "node src/index.js"
+    },
+    "dependencies": {
+        "@borane/slick": "^4.0.0",
+        "axios": "^1.6.2",
+        "follow-redirects": "^1.15.3"
+    }
+}
