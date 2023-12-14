@@ -93,3 +93,30 @@ for(let p of periods){
 
     periodsContainer.appendChild(button);
 }
+
+document.addEventListener("touchstart", () => {
+    const activePopup = document.querySelector("#table > div > div > div > div.active");
+    if(activePopup != null)
+        activePopup.classList.remove("active");
+});
+
+for(let button of document.querySelectorAll("#table > div > div > div")){
+    const popup = button.querySelector("div");
+
+    popup.addEventListener("touchstart", e => e.stopPropagation());
+
+    button.addEventListener("touchstart", e => {
+        e.stopPropagation();
+
+        if(popup.classList.contains("active")){
+            popup.classList.remove("active");
+            return;
+        }
+
+        const activePopup = document.querySelector("#table > div > div > div > div.active");
+        if(activePopup != null)
+            activePopup.classList.remove("active");
+
+        popup.classList.add("active");
+    });
+}

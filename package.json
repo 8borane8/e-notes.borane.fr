@@ -2,6 +2,15 @@
     "name": "e-notes.borane.fr",
     "version": "1.0.0",
     "author": "borane",
+    "license": "MIT",
+
+    "homepage": "https://github.com/8borane8/e-notes.borane.fr",
+	"bugs": "https://github.com/8borane8/e-notes.borane.fr/issues",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/8borane8/e-notes.borane.fr.git"
+	},
+
     "scripts": {
         "dev": "node src/index.js --dev",
         "build": "node src/index.js"
