@@ -108,11 +108,6 @@ for(let button of document.querySelectorAll("#table > div > div > div")){
     button.addEventListener("touchstart", e => {
         e.stopPropagation();
 
-        if(popup.classList.contains("active")){
-            popup.classList.remove("active");
-            return;
-        }
-
         const activePopup = document.querySelector("#table > div > div > div > div.active");
         if(activePopup != null)
             activePopup.classList.remove("active");
