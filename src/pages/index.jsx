@@ -19,24 +19,12 @@ return {
 
         <meta name="og:description" content="Calculez votre moyenne EcoleDirecte !" />
         <meta name="description" content="Calculez votre moyenne EcoleDirecte !" />
+
         <meta name="keywords" content="e-notes, moyenne, ecoledirecte" />
     </>,
 
-    body: async req => {
-        const response = await expressapi.RequestHelper.request({
-            url: `http://api.ecoledirecte.com/v3/eleves/${req.cookies.id}/notes.awp?verbe=get&v=6.9.1`,
-            method: "POST",
-            headers: {
-                "User-Agent": req.headers["user-agent"],
-                "X-Token": req.cookies.token
-            },
-            body: `data={"anneeScolaire": ""}`
-        });
-
-        if(response.code != 200)
-            return <><p>Une erreur est survenue, merci de supprimer vos cookies.</p></>;
-
-        const periods = response.data.periodes.map(p => ({
+    body: req => {
+        const periods = req.response.data.periodes.map(p => ({
             period: p.codePeriode,
             name: p.periode,
 
@@ -44,7 +32,7 @@ return {
             endDate: p.dateFin
         }));
 
-        const marks = response.data.notes.map(m => ({
+        const marks = req.response.data.notes.map(m => ({
             subject: m.libelleMatiere,
             period: m.codePeriode,
 
@@ -67,23 +55,34 @@ return {
                     <p>Moyenne</p>
                 </div>
             </div>
-            <p>
-                Moyenne Générale: <span id="average-label">Inconnue</span>
-                <a href="/préférences" aria-label="préférences">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5"/>
-                        <path d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0z"/>
-                    </svg>
-                </a>
-            </p>
+            <p>Moyenne Générale: <span id="average-label">Inconnue</span></p>
 
             <span id="periods-data">{JSON.stringify(periods)}</span>
             <span id="marks-data">{JSON.stringify(marks)}</span>
         </>;
     },
 
-    onrequest: req => {
-        if(!Object.keys(req.cookies).includes("token"))
+    onrequest: async req => {
+        if(!Object.keys(req.cookies).includes("token")){
             req.url = "/connexion";
+            return;
+        }
+            
+        const response = await expressapi.RequestHelper.request({
+            url: `http://api.ecoledirecte.com/v3/eleves/${req.cookies.id}/notes.awp?verbe=get&v=6.9.1`,
+            method: "POST",
+            headers: {
+                "User-Agent": req.headers["user-agent"],
+                "X-Token": req.cookies.token
+            },
+            body: `data={"anneeScolaire": ""}`
+        });
+
+        if(response.code != 200){
+            req.url = "/deconnexion";
+            return;
+        }
+
+        req.response = response;
     }
 };

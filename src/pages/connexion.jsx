@@ -18,6 +18,7 @@ return {
 
         <meta name="og:description" content="Connexion" />
         <meta name="description" content="Connexion" />
+        
         <meta name="keywords" content="e-notes connexion" />
     </>,
 
